@@ -29,7 +29,7 @@ def on_open(ws):
 	# ws.send(json.dumps({'token': 'YOUR_TOKEN'}))
 
 def start_websocket():
-	ws = websocket.WebSocketApp('ws://localhost:5075', on_open=on_open, on_message=on_message, on_error=on_error, on_close=on_close)
+	ws = websocket.WebSocketApp('ws://localhost:8000', on_open=on_open, on_message=on_message, on_error=on_error, on_close=on_close)
 	ws.run_forever(ping_interval=60)  # 每60秒发送心跳
 
 if __name__ == '__main__':
