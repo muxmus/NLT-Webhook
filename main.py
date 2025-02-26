@@ -3,15 +3,16 @@ import requests
 import datetime
 import json
 import time
+from urllib.parse import quote
 
 def on_message(ws, message):
 	try:
 		data = json.loads(message)
 		if data != {"ping": True}:
 			print('收到消息:', data)
-			title = data['title'].replace('&', '%26')
-			body = data['body'].replace('&', '%26')
-			requests.get(f'https://5476.push.ft07.com/send/sctp5476tajelm94z28n58c4wts6ysr.send?title={title}&desp={body}%0D%0A[{datetime.datetime.now().strftime('%Y.%m.%d %H:%M:%S')}]')
+			title = quote(data['title'])
+			body = quote(data['body'])
+			requests.get(f'https://yourwebohook/?title={title}&desp={body}%0D%0A[{datetime.datetime.now().strftime('%Y.%m.%d %H:%M:%S')}]')
 	except json.JSONDecodeError:
 		print('收到非JSON消息:', message)
 
